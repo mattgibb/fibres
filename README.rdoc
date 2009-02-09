@@ -1,0 +1,34 @@
+= Fibres
+
+Fibres is a Matlab code repository which generates cardiac fibre direction
+around a cylindrical vessel and runs electrophysiological simulations.
+
+= Requirements
+
+* CARP (Cardiac Arrhythmia Research Package, http://carp.meduni-graz.at/)
+
+= Download the Software
+
+If you want simply to use the current version, without keeping up to date
+with changes easily,
+* Click the download button above.
+* Choose between tar.gz and zip formats.
+
+Alternatively, if you want to keep up to date easily or contribute to the
+code,
+* Install the wonderful version control system Git. On Ubuntu this can be
+  done with the command 'sudo apt-get install git-core'. Otherwise, follow
+  the instructions at 'http://git-scm.com/'.
+* Type 'git config --global user.email <your.email@example.com>'. This will
+  add a line to ~/.gitconfig and stamp your email to commits you make.
+* In a terminal, change to the directory where you want to put the code.
+* Type 'git clone git://github.com/mattgibb/fibres.git'.
+
+
+= Edit the Configuration Files
+
+All the configuration files are stored in the config/ folder.
+* Enter the local installation directories of the required third-party
+  programs in config/program_folders.m
+
+  CHANGE COMMITTED VERSIONS TO E.G. 'config/program_folders_example.m'.
