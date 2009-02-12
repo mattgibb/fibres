@@ -1,0 +1,84 @@
+# carpe.linux.petsc +F parameters.dat 
+
+# Definition of REGION/GREGIONS
+# -----------------------------------
+# simID = monodomain
+num_regions = 1
+region[0].name = "Mesh"
+region[0].im = "MBRDR"
+#region[0].plugins = "EP_RS:IA" # Electroporation
+region[0].plugins       =      ""
+region[0].plug_sv_dumps =      ""
+
+# Activation times
+# -----------------------------------
+num_LATs = 1
+lats[0].threshold = -20 # by default, a voltage
+lats[0].all = 0 # only first activations
+lats[0].measurand = 0 # Vm
+lats[0].ID = "run1_acts" # output filename
+
+
+# Definition of STIMULUS
+# -----------------------------------
+num_stim = 1
+# current withdrawal (GND)
+#stimulus[0].start      =      0
+#stimulus[0].duration   =      1
+#stimulus[0].strength   =  -1000
+#stimulus[0].balance    =      2
+#stimulus[0].x0          =  -100
+#stimulus[0].xd          =  200
+#stimulus[0].y0          =  -100
+#stimulus[0].yd          =  200
+#stimulus[0].z0          =  -100
+#stimulus[0].zd          =   3100
+#stimulus[0].stimtype    =      3
+#stimulus[0].dump_vtx_file =    1
+
+stimulus[0].stimtype = 0
+stimulus[0].start = 0 #(ms)
+stimulus[0].strength = 10e-4
+stimulus[0].duration = 5 #(ms)
+stimulus[0].zd = 3000 #(um)
+stimulus[0].yd = 10000 #(um)
+stimulus[0].xd = 500 #(um)
+stimulus[0].z0 = 0 #(um)
+stimulus[0].y0 = 0 #(um)
+stimulus[0].x0 = 0 #(um)
+stimulus[0].name = "Pacing"
+stimulus[0].dump_vtx_file = 1
+
+
+# FEM SOLVER
+# -------------------------------------
+# mondomain
+solnmethod = 4
+
+gridout_i = 2
+#gridout_e = 2
+
+CN_parab = 1
+
+experiment = 0
+
+# tetrahedra
+readmesh = 3
+meshname = "image_renum_i" 
+
+dt = 20 # Recommended Value
+
+tend = 250
+spacedt = 1
+
+
+# GLOBAL CELLULAR PROPERTIES
+# -------------------------------------
+# Capacitance Membrane (uF/cm2)
+Cm = 1.0
+
+# Conductivities (S/m)
+gil = 0.136
+git = 0.0176 
+
+purkEleType = 0

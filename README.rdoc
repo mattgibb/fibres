@@ -18,7 +18,7 @@ Alternatively, if you want to keep up to date easily or contribute to the
 code,
 * Install the wonderful version control system Git. On Ubuntu this can be
   done with the command 'sudo apt-get install git-core'. Otherwise, follow
-  the instructions at 'http://git-scm.com/'.
+  the instructions at http://git-scm.com.
 * Type 'git config --global user.email <your.email@example.com>'. This will
   add a line to ~/.gitconfig and stamp your email to commits you make.
 * In a terminal, change to the directory where you want to put the code.

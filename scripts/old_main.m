@@ -1,13 +1,25 @@
-% Add Config.root_folder and all subdirectories to path if not in path
-% Only needs running once per Matlab session
-% CHANGE TO CLASSES FOLDER AND EXECUTE:
-Config.update_path;
-
-% Creates folder to save and load the simulation in data_folder if needed
+% file parameters
+root_folder = '/Users/matthewgibb/Documents/DPhil/Martin/working_copy/code/';
 filename = 'epicardial';
-Config.make_simulation_folder(filename)
-
+save_path = [root_folder 'data/' filename '/' filename];
 pathstr = fileparts(save_path); % [pathstr, name, ext, versn] = fileparts(filename)
+CARP_folder = [root_folder 'external_programs/CARP/'];
+
+% make folder 'filename' in 'data'
+eval(['!mkdir ' root_folder 'data/' filename])
+
+% add functions folder to path
+addpath([root_folder 'functions']);
+
+% tissue parameters
+lengths = [10000 10000 3000];
+base_coords = [5000 5000 1500];
+spacings = [200 200 200];
+radius = 1000;
+direction = [1 0 1];
+
+% normalises direction vector
+direction = direction/norm(direction);
 
 % generate 3D coordinates of each node in a cuboid, with origin at base_coords
 nodes = generate_nodes(lengths,spacings,base_coords);
