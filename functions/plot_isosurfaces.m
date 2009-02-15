@@ -1,10 +1,12 @@
-function plot_isosurfaces(nodes,radius,direction)
+function plot_isosurfaces(tissue)
     
     % unpacks data
-    positions = nodes.positions;
-    mesh_size = nodes.mesh_size;
-    is_tissue = nodes.is_tissue;
-    V         = nodes.V;
+    radius    = tissue.vessel.radius;
+    direction = tissue.vessel.direction;
+    positions = tissue.node_positions;
+    mesh_size = tissue.mesh_size;
+    is_tissue = tissue.is_tissue;
+    V         = tissue.V;
     
     % declare figure size
     figure_size = [360,500,600,700];

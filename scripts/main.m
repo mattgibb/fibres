@@ -9,31 +9,16 @@ Config.make_simulation_folder(filename)
 
 pathstr = fileparts(save_path); % [pathstr, name, ext, versn] = fileparts(filename)
 
-% generate 3D coordinates of each node in a cuboid, with origin at base_coords
-nodes = generate_nodes(lengths,spacings,base_coords);
+% v = Vessel;
+% t = Tissue(v);
+plot3(t.node_positions(t.is_tissue,1),...
+      t.node_positions(t.is_tissue,2),...
+      t.node_positions(t.is_tissue,3),'.');
+axis equal
 
-% calculates node component vectors along and perpendicular to vessel
-nodes = calculate_radial_and_longditudinal_components(nodes,direction);
-
-% calculate r and determine which nodes are tissue nodes
-nodes = determine_tissue(nodes,radius);
-
-% plot3(nodes.positions(nodes.is_tissue,1),...
-%       nodes.positions(nodes.is_tissue,2),...
-%       nodes.positions(nodes.is_tissue,3),'.');
-% axis equal
-
-% generate potentials at nodes
-nodes = generate_potential_field(nodes,radius);
-
-% calculate fibre direction
-nodes = calculate_grad_V(nodes,radius);
-nodes = generate_alpha(nodes,min(nodes.V(:)),max(nodes.V(:))); % alpha == 0 || varies with cubic
-nodes = calculate_projected_vectors(nodes,radius,direction);
-nodes = calculate_fibre_directions(nodes);
 
 % plot potential field isosurfaces
-% plot_isosurfaces(nodes,radius,direction)
+% plot_isosurfaces(t)
 
 % Generate image files
 image = zeros(nodes.mesh_size + [2 2 2]);
