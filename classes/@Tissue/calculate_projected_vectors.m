@@ -4,7 +4,7 @@ function calculate_projected_vectors(obj)
 is_tissue        = obj.is_tissue;
 V                = obj.V(is_tissue);
 node_positions   = obj.node_positions(is_tissue,:);
-alpha            = obj.alpha; % plus pi/2 as grad is perp to isolines
+alpha            = obj.alpha;
 direction        = obj.vessel.direction;
 base_coordinates = repmat(obj.vessel.base_coordinates,size(V));
 phi              = obj.vessel.polar_angles(1);
@@ -12,7 +12,7 @@ theta            = obj.vessel.polar_angles(2);
 radius           = obj.vessel.radius;
 
 % initialises projected_vector to zero
-obj.projected_vectors = zeros(size(node_positions));
+obj.projected_vectors = zeros(size(obj.node_positions));
 
 if direction(2) ~= 0 % the projected circle is not a line
     % calculate x-z position of vessel axis with same V,
@@ -33,7 +33,7 @@ if direction(2) ~= 0 % the projected circle is not a line
         % ( x_dash  z_dash) = ( cos(alpha)  sin(alpha) )*( cos(phi) -sin(phi) )*( 1/cos(theta)   0   )*( cos(phi)  sin(phi) )
         %                                                ( sin(phi)  cos(phi) ) (      0         1   ) (-sin(phi)  cos(phi) )
         % tan(alpha_dash) = z_dash/x_dash
-                
+        
         % calculate matrix multiplication
         M = [cos(phi),-sin(phi);sin(phi),cos(phi)]*[1/cos(theta),0;0,1]*[cos(phi) sin(phi);-sin(phi) cos(phi)];
         
@@ -64,7 +64,7 @@ if direction(2) ~= 0 % the projected circle is not a line
     % calculates grad V for conducting circle in these coords
     E_rotated(:,1) = 2*radius^2*alpha_x.*alpha_y ./ ...
                      (alpha_x.^2 + alpha_y.^2).^2;
-    E_rotated(:,2) = 1 + ( radius^2*(alpha_x.^2 - alpha_y.^2) ) ./ ...
+    E_rotated(:,2) = 1 - ( radius^2*(alpha_x.^2 - alpha_y.^2) ) ./ ...
                      (alpha_x.^2 + alpha_y.^2).^2;
     
     % rotates result by alpha, back into original coords

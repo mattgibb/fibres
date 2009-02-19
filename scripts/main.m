@@ -10,22 +10,20 @@ Config.make_simulation_folder(filename)
 pathstr = fileparts(save_path); % [pathstr, name, ext, versn] = fileparts(filename)
 
 % v = Vessel;
-% t = Tissue(v);
-plot3(t.node_positions(t.is_tissue,1),...
-      t.node_positions(t.is_tissue,2),...
-      t.node_positions(t.is_tissue,3),'.');
-axis equal
-
+% tb = TissueBlock(v);
+% plot3(tb.node_positions(tb.is_tissue,1),...
+%       tb.node_positions(tb.is_tissue,2),...
+%       tb.node_positions(tb.is_tissue,3),'.');
+% axis equal
 
 % plot potential field isosurfaces
-% plot_isosurfaces(t)
+% plot_isosurfaces(tb)
 
 % Generate image files
 image = zeros(nodes.mesh_size + [2 2 2]);
 image(2:end-1,2:end-1,2:end-1) = reshape(nodes.is_tissue,nodes.mesh_size);
 image = reshape(image,[],1);
 generate_vox_file(nodes,spacings,save_path,image);
-
 
 % GENERATE FILES REMOTELY
 

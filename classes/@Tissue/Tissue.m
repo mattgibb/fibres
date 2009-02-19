@@ -1,22 +1,21 @@
 classdef Tissue < handle
     % A cuboid section of ventricular myocardial wall.
-    % Detailed explanation goes here
+    % WARNING: This object can go stale i.e. out of sync with its vessel.
+    % The subclass TissueBlock has listener methods
     
     properties
         vessel
-        node_spacings = [200 200 200]
-        lengths = [10000 10000 3000]
-        HLCalculateComponentsSheetsAndFibres
-        HLRadius
     end
     
     properties(SetAccess = protected)
         node_positions
-        radii % use this instead of is_tissue to plot vessel boundary!
+        radii
         V
         grad_V
         projected_vectors
         fibre_directions
+        min_V
+        max_V
     end
     
     properties(Access = protected)
@@ -26,46 +25,15 @@ classdef Tissue < handle
         is_tissue
     end
     
-    properties(Dependent = true)
-        mesh_size
-    end
-    
     methods
-        function T = Tissue(vessel,varargin)
-            T.vessel = vessel;
-            if nargin > 1
-                T.node_spacings = varargin{1};
+        function T = Tissue(varargin) % (vessel,node_positions,min_V,max_V)
+            if nargin > 0
+                T.vessel = varargin{1};
+                T.node_positions = varargin{2};
+                T.min_V = varargin{3};
+                T.max_V = varargin{4};
+                T.calculate_components_sheets_and_fibres
             end
-            if nargin > 2
-                T.lengths = varargin{2};
-            end
-            T.calculate_tissue
-            T.create_listeners
-        end
-        
-        function obj = set.node_spacings(obj,value)
-            if ~all(size(value) == [1 3])
-                error('node_spacings must be a row vector of length 3.')
-            end
-            obj.node_spacings = value;
-            obj.calculate_tissue
-        end
-        
-        function obj = set.lengths(obj,value)
-            if ~all(size(value == [1 3]))
-                error('lengths must be a row vector of length 3.')
-            end
-            obj.lengths = value;
-            obj.calculate_tissue
-        end
-        
-        function size = get.mesh_size(obj)
-            size = ceil(obj.lengths./obj.node_spacings + 1);
-        end
-        
-        function calculate_tissue(T)
-            T.calculate_node_positions
-            T.calculate_components_sheets_and_fibres
         end
         
         function calculate_components_sheets_and_fibres(T)
@@ -82,20 +50,5 @@ classdef Tissue < handle
             T.calculate_fibre_directions
         end
         
-        function create_listeners(T)
-            T.HLCalculateComponentsSheetsAndFibres = addlistener(...
-                T.vessel,'CalculateComponentsSheetsAndFibres',...
-                @(src,evnt)listenCalculateComponentsSheetsAndFibres(T,src,evnt));
-            T.HLRadius = addlistener(T.vessel,'radius','PostSet',...
-                @(src,evnt)listenRadius(T,src,evnt));
-        end
-        
-        function listenCalculateComponentsSheetsAndFibres(T,src,evnt)
-            T.calculate_components_sheets_and_fibres
-        end
-        
-        function listenRadius(T,src,evnt)
-            T.calculate_sheets_and_fibres
-        end
     end
 end

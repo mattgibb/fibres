@@ -7,6 +7,7 @@ n = [0 1 0];
 is_tissue               = obj.is_tissue;
 radii                   = obj.radii;
 R                       = radii(is_tissue)/obj.vessel.radius;
+base_coordinates        = obj.vessel.base_coordinates;
 node_positions          = obj.node_positions;
 radial_components       = obj.radial_components;
 longitudinal_components = obj.longitudinal_components;
@@ -15,8 +16,9 @@ longitudinal_components = obj.longitudinal_components;
 obj.V = zeros(size(radii));
 
 % in tissue
-obj.V(is_tissue) = node_positions(is_tissue,:)*n' ...
-     - (radial_components(is_tissue,:)*n') ./ R.^2;
+obj.V(is_tissue) = node_positions(is_tissue,:)*n'...
+    - base_coordinates*n'...
+    - (radial_components(is_tissue,:)*n') ./ R.^2;
 
 % in vessel
 obj.V(~is_tissue) = longitudinal_components(~is_tissue,:)*n';

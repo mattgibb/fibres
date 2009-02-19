@@ -1,6 +1,12 @@
 classdef Vessel < handle
     % Blood vessel running through the tissue.
-    %   Detailed explanation goes here
+    % constructor:
+    % v = Vessel(varargin);
+    %
+    % ARGUMENT                      DEFAULT
+    % varargin{1}: radius,          1000
+    % varargin{2}: polar_angles     [0 0]
+    % varargin{3}: base_coordinates [5000 5000 1500]
     
     properties
         polar_angles = [0 0] % spherical polar coords around y-axis
