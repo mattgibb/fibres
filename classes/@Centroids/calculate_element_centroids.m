@@ -1,13 +1,14 @@
-function centroids = generate_element_centroids(save_path)
+function centroids = calculate_element_centroids(data_folder)
 % Finds coordinates of centroids of elements
-% THIS FUNCTION DOES NOT SUBTRACT base_coords!!!!
 
+% constructs filename
+filename = [data_folder '/image_renum'];
 
 % loads node data
-nodes = dlmread([save_path '.pts'],'',1,0);
+nodes = dlmread([filename '.pts'],'',1,0);
 
 % loads element data and removes final 'region' column
-elements = dlmread([save_path '.elem'],'',1,1);
+elements = dlmread([filename '.elem'],'',1,1);
 elements(:,5) = [];
 
 % Initialises centroids variable
@@ -39,6 +40,9 @@ for i = 1:length(elements)
 end
 
 % writes the number of centroids as the first line
-dlmwrite([save_path '.vpts'],size(centroids,1),' ')
+dlmwrite([filename '.vpts'],size(centroids,1),...
+         'delimiter','',...
+         'precision','%-20.0f');
+
 % writes the centroids
-dlmwrite([save_path '.vpts'],centroids,'-append','delimiter',' ')
+dlmwrite([filename '.vpts'],centroids,'-append','delimiter',' ')

@@ -15,10 +15,10 @@ classdef TissueBlock < Tissue
     methods
         function T = TissueBlock(vessel,varargin)
             T.vessel = vessel;
-            if nargin > 1
+            if nargin >= 2
                 T.node_spacings = varargin{1};
             end
-            if nargin > 2
+            if nargin >= 3
                 T.lengths = varargin{2};
             end
             T.calculate_tissue

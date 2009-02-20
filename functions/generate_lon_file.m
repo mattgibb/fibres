@@ -1,4 +1,4 @@
-function generate_lon_file(pathstr,centroids,method)
+function generate_lon_file(data_folder,centroids,method)
 
 is_tissue = centroids.is_tissue;
 
@@ -16,9 +16,9 @@ switch method
 end
 
 % writes data to .lon file for CARP
-dlmwrite([pathstr '/image_renum.lon'],directions,...
+dlmwrite([data_folder '/image_renum.lon'],directions,...
          'delimiter',' ',...
          'precision',10);
 
 % makes .vec file for viewing in Meshalyzer
-eval(['!cp ' pathstr '/image_renum.lon ' pathstr '/image_renum.vec']);
+eval(['!cp ' data_folder '/image_renum.lon ' data_folder '/image_renum.vec']);

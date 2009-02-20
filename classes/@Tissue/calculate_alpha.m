@@ -4,8 +4,8 @@ function calculate_alpha(obj)
 is_tissue = obj.is_tissue;
 V = obj.V;
 if isempty(obj.min_V) && isempty(obj.max_V)
-    obj.min_V = min(V(:));
-    obj.max_V = max(V(:));
+    obj.min_V = min(V);
+    obj.max_V = max(V);
 end
 
 % alpha == 1 - 2 * normalised distance parameter
