@@ -35,7 +35,8 @@ function plot_isosurface(setter,source,eventdata)
         
     % build tissue
     surface = Tissue(setter.tissue_block.vessel,...
-        get(hpatch,'Vertices'),min(V(:)),max(V(:)));
+        get(hpatch,'Vertices'),min(V(:)),max(V(:)),...
+        setter.tissue_block.min_y,setter.tissue_block.max_y);
     
     % plot grad_V at verteces of isosurface patch
     switch 1

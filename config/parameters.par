@@ -65,7 +65,7 @@ meshname = "image_renum"
 
 dt = 20 # Recommended Value
 
-tend = 30
+tend = 5
 spacedt = 1
 
 

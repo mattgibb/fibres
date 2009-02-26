@@ -11,8 +11,8 @@ setter = TissueSetter(tb);
 % Creates folder to save and load the simulation in data_folder if needed
 filename = 'epicardial';
 data_path = Config.data_path(filename);
-Config.make_simulation_folder(filename)
 data_folder = fileparts(data_path); % [pathstr, name, ext, versn] = fileparts(filename)
+Config.make_simulation_folder(filename)
 
 % Generate image files
 image = zeros(tb.mesh_size + [2 2 2]);
@@ -32,8 +32,8 @@ eval(['!scp ' data_path '.vox gibbm@clpc293.comlab.ox.ac.uk:/home/gibbm/image.vo
  % generates image_renum.pts and .elem
 !ssh gibbm@clpc293.comlab.ox.ac.uk "/home/scratch/programmes/CardioEngLib/Examples/renumber_mesh/renumber_mesh image"
 
-% copy image files to local folder
-eval(['!scp gibbm@clpc293.comlab.ox.ac.uk:/home/gibbm/image_renum* ' data_folder '/'])
+% copy image_renum.pts and image_renum.elem to local folder
+eval(['!scp gibbm@clpc293.comlab.ox.ac.uk:/home/gibbm/image_renum.* ' data_folder '/'])
 
 % convert .pts files from voxel units to micrometres
 convert_pts_files([data_folder '/image_renum.pts'],tb.node_spacings)
@@ -42,7 +42,9 @@ convert_pts_files([data_folder '/image_renum.pts'],tb.node_spacings)
 centroid_positions = Centroids.calculate_element_centroids(data_folder);
 
 % make tissue object of centroids
-centroids = Centroids(v,centroid_positions,tb.min_V,tb.max_V,tb.min_y,tb.max_y,data_folder);
+% HACK: POSITION OF TISSUE IS SLIGHTLY OFFSET WRT VESSEL v DUE TO VOXEL
+% METHOD
+centroids = Centroids(v,centroid_positions,data_folder);
 
 % decides which set of vectors to use
 method = 'potential';
@@ -57,13 +59,14 @@ bidomain_folder = '/bidomain';
 monodomain_folder = '/monodomain';
 
 % run CARP on generated files for bidomain
-run_CARP(data_folder,'parameters.par',bidomain_folder)
+run_CARP('queeg',data_folder,bidomain_folder,filename)
 
 % copy files from bidomain run
 copy_bidomain_to_monodomain(data_folder,bidomain_folder)
 
 % run CARP on bidomain files for monodomain
 run_CARP(data_folder,'parameters_mono.par',monodomain_folder)
+
 
 % generate lon file for simple_alpha
 method = 'simple_alpha';
