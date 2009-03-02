@@ -1,6 +1,5 @@
 # Definition of REGION/GREGIONS
 # -----------------------------------
-# simID = bidomain
 num_regions = 1
 region[0].name = "Mesh"
 region[0].im = "MBRDR"
@@ -65,7 +64,7 @@ meshname = "image_renum"
 
 dt = 20 # Recommended Value
 
-tend = 5
+tend = 200
 spacedt = 1
 
 

@@ -14,7 +14,7 @@ radius           = obj.vessel.radius;
 % initialises projected_vector to zero
 obj.projected_vectors = zeros(size(obj.node_positions));
 
-if direction(2) ~= 0 % the projected circle is not a line
+if abs(direction(2)) > 10e-15 % the projected circle is not a line
     % calculate x-z position of vessel axis with same V,
     % relative to base_coordinates
     intersection = [V*direction(1) V*direction(3)]/direction(2);
@@ -93,5 +93,5 @@ if direction(2) ~= 0 % the projected circle is not a line
     obj.projected_vectors(is_tissue,3) = -isopotentials(:,1);
     
 else
-    obj.projected_vectors(is_tissue,[1 3]) = [cos(alpha) sin(alpha)];
+    obj.projected_vectors(is_tissue,[1 3]) = [-sin(alpha) cos(alpha)];
 end

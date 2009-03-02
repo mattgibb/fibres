@@ -2,7 +2,6 @@
 
 # Definition of REGION/GREGIONS
 # -----------------------------------
-# simID = monodomain
 num_regions = 1
 region[0].name = "Mesh"
 region[0].im = "MBRDR"
@@ -18,10 +17,9 @@ lats[0].all = 0 # only first activations
 lats[0].measurand = 0 # Vm
 lats[0].ID = "run1_acts" # output filename
 
-
 # Definition of STIMULUS
 # -----------------------------------
-num_stim = 1
+num_stim = 2
 # current withdrawal (GND)
 #stimulus[0].start      =      0
 #stimulus[0].duration   =      1
@@ -40,14 +38,28 @@ stimulus[0].stimtype = 0
 stimulus[0].start = 0 #(ms)
 stimulus[0].strength = 10e-4
 stimulus[0].duration = 5 #(ms)
-stimulus[0].zd = 3000 #(um)
-stimulus[0].yd = 10000 #(um)
-stimulus[0].xd = 500 #(um)
-stimulus[0].z0 = 0 #(um)
-stimulus[0].y0 = 0 #(um)
-stimulus[0].x0 = 0 #(um)
+stimulus[0].x0 = -200 #(um)
+stimulus[0].y0 = -200 #(um)
+stimulus[0].z0 = -200 #(um)
+stimulus[0].xd = 600 #(um)
+stimulus[0].yd = 15200 #(um)
+stimulus[0].zd = 3200 #(um)
 stimulus[0].name = "Pacing"
-stimulus[0].dump_vtx_file = 1
+stimulus[0].dump_vtx_file = 0
+
+stimulus[1].stimtype = 0
+stimulus[1].start = 235 #(ms)
+stimulus[1].strength = 10e-4
+stimulus[1].duration = 5 #(ms)
+stimulus[1].x0 = -200 #(um)
+stimulus[1].y0 = 7500 #(um)
+stimulus[1].z0 = -200 #(um)
+stimulus[1].xd = 7500 #(um)
+stimulus[1].yd = 15200 #(um)
+stimulus[1].zd = 3200 #(um)
+stimulus[1].name = "Trigger"
+stimulus[1].dump_vtx_file = 0
+
 
 
 # FEM SOLVER
@@ -68,7 +80,7 @@ meshname = "image_renum_i"
 
 dt = 20 # Recommended Value
 
-tend = 250
+tend = 800
 spacedt = 1
 
 

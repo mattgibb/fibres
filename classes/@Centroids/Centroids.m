@@ -10,7 +10,7 @@ classdef Centroids < Tissue
         function centroids = Centroids(vessel,centroid_positions,data_folder)
             centroids.vessel = vessel;
             centroids.node_positions = centroid_positions;
-            
+     
             centroids.calculate_radial_and_longitudinal_components
             centroids.determine_tissue(data_folder)
             centroids.calculate_potential_field

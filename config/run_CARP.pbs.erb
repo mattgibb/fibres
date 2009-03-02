@@ -6,6 +6,6 @@
 
 cd $PBS_O_WORKDIR
 mpirun  -np $(cat $PBS_NODEFILE | wc -l) -m $PBS_NODEFILE \ /home/virtualheart/gplank/carp_user_execs/queeg/martin.bishop/carp.linux.petsc \
-+F $HOME/CARP/fibres/config/parameters.par \
++F $HOME/CARP/fibres/config/parameters_mono.par \
 -meshname $HOME/CARP/fibres/data/<%= ARGV[1] %>/image_renum \
 -simID $HOME/CARP/fibres/data/<%= ARGV[1] %><%= ARGV[2] %>

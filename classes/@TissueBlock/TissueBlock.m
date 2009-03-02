@@ -1,8 +1,8 @@
 classdef TissueBlock < Tissue
     % Used to models histological sample of myocardial wall
     properties
-        node_spacings = [200 200 200]
-        lengths = [10000 10000 3000]
+        node_spacings = [100 100 100]
+        lengths = [15000 15000 3000]
         HLCalculateComponentsSheetsAndFibres
         HLRadius
 
@@ -65,8 +65,6 @@ classdef TissueBlock < Tissue
         function listenRadius(T,src,evnt)
             T.calculate_sheets_and_fibres
         end
-        
     end
-    
 end
 

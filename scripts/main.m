@@ -61,12 +61,14 @@ monodomain_folder = '/monodomain';
 % run CARP on generated files for bidomain
 run_CARP('queeg',data_folder,bidomain_folder,filename)
 
+% copy image_renum_i.* and vm.igb.gz back to the local machine
+copy_files_from_supercomputer('queeg',data_folder,bidomain_folder,filename)
+
 % copy files from bidomain run
 copy_bidomain_to_monodomain(data_folder,bidomain_folder)
 
 % run CARP on bidomain files for monodomain
 run_CARP(data_folder,'parameters_mono.par',monodomain_folder)
-
 
 % generate lon file for simple_alpha
 method = 'simple_alpha';
