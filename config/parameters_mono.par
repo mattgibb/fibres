@@ -4,7 +4,7 @@
 # -----------------------------------
 num_regions = 1
 region[0].name = "Mesh"
-region[0].im = "MBRDR"
+region[0].im = "UCLA_RAB"
 #region[0].plugins = "EP_RS:IA" # Electroporation
 region[0].plugins       =      ""
 region[0].plug_sv_dumps =      ""
