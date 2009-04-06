@@ -48,13 +48,13 @@ stimulus[0].name = "Pacing"
 stimulus[0].dump_vtx_file = 0
 
 stimulus[1].stimtype = 0
-stimulus[1].start = 235 #(ms)
+stimulus[1].start = 180 #(ms)
 stimulus[1].strength = 10e-4
 stimulus[1].duration = 5 #(ms)
 stimulus[1].x0 = -200 #(um)
 stimulus[1].y0 = 7500 #(um)
 stimulus[1].z0 = -200 #(um)
-stimulus[1].xd = 7500 #(um)
+stimulus[1].xd = 12500 #(um)
 stimulus[1].yd = 15200 #(um)
 stimulus[1].zd = 3200 #(um)
 stimulus[1].name = "Trigger"
@@ -76,7 +76,7 @@ experiment = 0
 
 # tetrahedra
 readmesh = 3
-meshname = "image_renum_i" 
+meshname = "image_renum"
 
 dt = 20 # Recommended Value
 

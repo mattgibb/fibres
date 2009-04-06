@@ -27,6 +27,6 @@ classdef Centroids < Tissue
     end
     
     methods (Static = true)
-        centroids = calculate_element_centroids(data_folder)
+        centroids = calculate_element_centroids(data_folder,basename)
     end
 end

@@ -1,8 +1,8 @@
-function centroids = calculate_element_centroids(data_folder)
+function centroids = calculate_element_centroids(data_folder,basename)
 % Finds coordinates of centroids of elements
 
 % constructs filename
-filename = [data_folder '/image_renum'];
+filename = [data_folder '/' basename];
 
 % loads node data
 nodes = dlmread([filename '.pts'],'',1,0);

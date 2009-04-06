@@ -4,7 +4,7 @@
 Config.update_path
 
 % set vessel and tissue
-v = Vessel;
+v = Vessel(1000,[pi/2 pi/2],[7500,13500,1500]);
 tb = TissueBlock(v);
 setter = TissueSetter(tb);
 
@@ -17,6 +17,7 @@ Config.make_simulation_folder(filename)
 % Generate image files
 image = zeros(tb.mesh_size + [2 2 2]);
 image(2:end-1,2:end-1,2:end-1) = reshape(tb.is_tissue,tb.mesh_size);
+image = permute(image,[2 1 3]);
 image = image(:);
 generate_vox_file(tb,data_path,image);
 
@@ -39,7 +40,7 @@ eval(['!scp gibbm@clpc293.comlab.ox.ac.uk:/home/gibbm/image_renum.* ' data_folde
 convert_pts_files([data_folder '/image_renum.pts'],tb.node_spacings)
 
 % generate .vpts file
-centroid_positions = Centroids.calculate_element_centroids(data_folder);
+centroid_positions = Centroids.calculate_element_centroids(data_folder,'image_renum');
 
 % make tissue object of centroids
 % HACK: POSITION OF TISSUE IS SLIGHTLY OFFSET WRT VESSEL v DUE TO VOXEL
@@ -59,30 +60,8 @@ bidomain_folder = '/bidomain';
 monodomain_folder = '/monodomain';
 
 % run CARP on generated files for bidomain
-run_CARP('queeg',data_folder,bidomain_folder,filename)
+run_CARP('queeg',data_folder,monodomain_folder,filename)
 
 % copy image_renum_i.* and vm.igb.gz back to the local machine
-copy_files_from_supercomputer('queeg',data_folder,bidomain_folder,filename)
+copy_files_from_supercomputer('queeg',data_folder,monodomain_folder,filename)
 
-% copy files from bidomain run
-copy_bidomain_to_monodomain(data_folder,bidomain_folder)
-
-% run CARP on bidomain files for monodomain
-run_CARP(data_folder,'parameters_mono.par',monodomain_folder)
-
-% generate lon file for simple_alpha
-method = 'simple_alpha';
-generate_lon_file(data_folder,centroids,method);
-
-% reset folders
-bidomain_folder = '/bidomain_simple_alpha';
-monodomain_folder = '/monodomain_simple_alpha';
-
-% run CARP on generated files for bidomain
-run_CARP(data_folder,'parameters.par',bidomain_folder)
-
-% copy files from bidomain run
-copy_bidomain_to_monodomain(data_folder,bidomain_folder)
-
-% run CARP on bidomain files for monodomain
-run_CARP(data_folder,'parameters_mono.par',monodomain_folder)

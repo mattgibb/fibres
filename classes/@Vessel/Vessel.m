@@ -6,11 +6,11 @@ classdef Vessel < handle
     % ARGUMENT                      DEFAULT
     % varargin{1}: radius,          1000
     % varargin{2}: polar_angles     [0 0]
-    % varargin{3}: base_coordinates [5000 5000 1500]
+    % varargin{3}: base_coordinates [7500 13500 1500]
     
     properties
         polar_angles = [0 0] % spherical polar coords around y-axis
-        base_coordinates = [5000 5000 1500] % specify point on vessel axis
+        base_coordinates = [7500 13500 1500] % specify point on vessel axis
     end
     
     properties (SetObservable = true)

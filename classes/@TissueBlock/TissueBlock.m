@@ -1,5 +1,11 @@
 classdef TissueBlock < Tissue
     % Used to models histological sample of myocardial wall
+    % constructor:
+    % tb = TissueBlock(vessel,varargin);
+    %
+    % ARGUMENT                      DEFAULT
+    % varargin{1}: node_spacings    [100 100 100]
+    % varargin{2}: lengths          [15000 15000 3000]
     properties
         node_spacings = [100 100 100]
         lengths = [15000 15000 3000]
