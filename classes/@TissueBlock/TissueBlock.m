@@ -53,7 +53,7 @@ classdef TissueBlock < Tissue
         end
         
         function set.lengths(obj,value)
-            if ~all(size(value == [1 3]))
+            if ~all(size(value) == [1 3])
                 error('lengths must be a row vector of length 3.')
             end
             obj.lengths = value;
