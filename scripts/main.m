@@ -4,8 +4,8 @@
 Config.update_path
 
 % set vessel and tissue
-v = Vessel(1000,[pi/2 pi/2]);
-tb = TissueBlock(v,[200 200 200],[10000 25000 3000]);
+v = Vessel(1000,[pi/2 pi/2],[12500 8500 1500]);
+tb = TissueBlock(v,[200 200 200],[25000 10000 3000]);
 setter = TissueSetter(tb);
 
 % Creates folder to save and load the simulation in data_folder if needed

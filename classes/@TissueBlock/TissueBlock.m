@@ -62,6 +62,7 @@ classdef TissueBlock < Tissue
 
         function size = get.mesh_size(obj)
             size = ceil(obj.lengths./obj.node_spacings + 1);
+            size = size([2 1 3]);
         end
         
         function listenCalculateComponentsSheetsAndFibres(T,src,evnt)
