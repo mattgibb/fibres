@@ -7,8 +7,8 @@ region[0].name = "Mesh"
 region[0].im = "UCLA_RAB"
 #region[0].plugins = "EP_RS:IA" # Electroporation
 region[0].plugins       =      ""
-region[0].plug_sv_dumps =      ""
-region[0].im_sv_init = "ucla_bcl_220.sv"
+# region[0].plug_sv_dumps =      ""
+# region[0].im_sv_init = "ucla_bcl_220.sv"
 
 # Activation times
 # -----------------------------------
@@ -36,7 +36,8 @@ stimulus[0].name = "Pacing"
 stimulus[0].dump_vtx_file = 0
 
 stimulus[1].stimtype = 0
-stimulus[1].start = 180 #(ms)
+# stimulus[1].start = 180 #(ms)
+stimulus[1].start = 10 #(ms)
 stimulus[1].strength = 10e-4
 stimulus[1].duration = 5 #(ms)
 stimulus[1].x0 = 12500 #(um)
@@ -68,7 +69,7 @@ meshname = "image_renum"
 
 dt = 20 # Recommended Value
 
-tend = 800
+tend = 20
 spacedt = 1
 
 
@@ -78,7 +79,7 @@ spacedt = 1
 Cm = 1.0
 
 # Conductivities (S/m)
-gil = 0.136
-git = 0.0176 
+# gil = 0.136
+# git = 0.0176 
 
 purkEleType = 0

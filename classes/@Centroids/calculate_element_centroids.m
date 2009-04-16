@@ -1,8 +1,5 @@
-function centroids = calculate_element_centroids(data_folder,basename)
+function centroids = calculate_element_centroids(filename)
 % Finds coordinates of centroids of elements
-
-% constructs filename
-filename = [data_folder '/' basename];
 
 % loads node data
 nodes = dlmread([filename '.pts'],'',1,0);
@@ -13,7 +10,7 @@ elements(:,5) = [];
 
 % centroids(element node_number axis)
 centroids = zeros([length(elements) 4 3]);
-centroids(:) = nodes(elements+1,[2 1 3]);
+centroids(:) = nodes(elements+1,:);
 centroids = squeeze(sum(centroids,2))/4;
 
 % writes the number of centroids as the first line
