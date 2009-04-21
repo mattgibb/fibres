@@ -5,7 +5,8 @@ region[0].name = "Mesh"
 region[0].im = "UCLA_RAB"
 #region[0].plugins = "EP_RS:IA" # Electroporation
 region[0].plugins       =      ""
-region[0].plug_sv_dumps =      ""
+# region[0].plug_sv_dumps =      ""
+# region[0].im_sv_init = "ucla_bcl_220.sv"
 
 # Activation times
 # -----------------------------------
@@ -17,7 +18,7 @@ lats[0].ID = "run1_acts" # output filename
 
 # Definition of STIMULUS
 # -----------------------------------
-num_stim = 2
+num_stim = 3
 # current withdrawal (GND)
 #stimulus[0].start      =      0
 #stimulus[0].duration   =      1
@@ -36,20 +37,33 @@ stimulus[1].stimtype = 0
 stimulus[1].start = 0 #(ms)
 stimulus[1].strength = 10e-4
 stimulus[1].duration = 5 #(ms)
-stimulus[1].zd = 3000 #(um)
-stimulus[1].yd = 10000 #(um)
-stimulus[1].xd = 500 #(um)
-stimulus[1].z0 = 0 #(um)
-stimulus[1].y0 = 0 #(um)
-stimulus[1].x0 = 0 #(um)
+stimulus[1].x0 = -200 #(um)
+stimulus[1].y0 = -200 #(um)
+stimulus[1].z0 = -200 #(um)
+stimulus[1].xd = 25200 #(um)
+stimulus[1].yd = 600#(um)
+stimulus[1].zd = 3200 #(um)
 stimulus[1].name = "Pacing"
 stimulus[1].dump_vtx_file = 1
+
+stimulus[2].stimtype = 0
+stimulus[2].start = 180 #(ms)
+stimulus[2].start = 10 #(ms)
+stimulus[2].strength = 10e-4
+stimulus[2].duration = 5 #(ms)
+stimulus[2].x0 = 12500 #(um)
+stimulus[2].y0 = -200 #(um)
+stimulus[2].z0 = -200 #(um)
+stimulus[2].xd = 25200 #(um)
+stimulus[2].yd = 7500 #(um)
+stimulus[2].zd = 3200 #(um)
+stimulus[2].name = "Trigger"
+stimulus[2].dump_vtx_file = 0
 
 
 # FEM SOLVER
 # -------------------------------------
-# bidomain
-solnmethod = 13
+solnmethod = 4 # 4 for mono, 13 for bi
 
 gridout_i = 2
 gridout_e = 2
@@ -60,11 +74,10 @@ experiment = 0
 
 # tetrahedra
 readmesh = 3
-meshname = "image_renum" 
 
 dt = 20 # Recommended Value
 
-tend = 200
+tend = 15
 spacedt = 1
 
 
@@ -74,9 +87,9 @@ spacedt = 1
 Cm = 1.0
 
 # Conductivities (S/m)
-gil = 0.174
-git = 0.019
-get = 0.236
-gel = 0.625
+# gil = 0.174
+# git = 0.019
+# get = 0.236
+# gel = 0.625
 
 purkEleType = 0

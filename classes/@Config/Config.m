@@ -1,7 +1,7 @@
 classdef Config
     % Accessor class to all values assigned in config/*
     %   Detailed explanation goes here
-        
+    
     methods (Static)
         % returns the application root folder
         function app_root = root_folder
@@ -30,7 +30,16 @@ classdef Config
             eval(['!mkdir ' data_folder filename])
         end
         
+        function folder = remote_simulation_folder(simulation_name)
+            program_folders; % runs config/program_folders.m
+            folder = [remote_simulation_base simulation_name '/'];
+        end
+        
+        function folder = remote_mesh_folder(mesh_name)
+            program_folders; % runs config/program_folders.m
+            folder = [remote_mesh_base mesh_name '/'];
+        end
+        
     end
-    
 end
 
