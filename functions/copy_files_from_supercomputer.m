@@ -1,4 +1,5 @@
-function copy_files_from_supercomputer(data_folder,simulation_name)
+function copy_files_from_supercomputer(simulation_name)
+local_folder = [Config.root_folder 'data/temp/'];
 simulation_folder = Config.remote_simulation_folder(simulation_name);
 simulation_folder = ['mgibb@redqueen.oerc.ox.ac.uk:' simulation_folder];
 
@@ -6,7 +7,7 @@ command = ['!scp ' simulation_folder 'image_renum_i.elem ' ...
                    simulation_folder 'image_renum_i.pts ' ...
                    simulation_folder 'image_renum_i.tris ' ...
                    simulation_folder 'vm.igb.gz ' ...
-                   data_folder];
+                   local_folder];
 
 disp(command)
 eval(command)

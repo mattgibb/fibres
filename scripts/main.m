@@ -3,14 +3,49 @@
 % CHANGE TO CLASSES FOLDER AND EXECUTE:
 Config.update_path
 
-% set vessel and tissue
+% decides which set of vectors to use
+% method = 'potential';
+% method = 'simple_zero';
+% method = 'simple_alpha';
+
+% set parameters for different meshes
+mesh_name = 'square_transmural_potential';
+method = 'potential';
+v = Vessel(1000,[0 0],[5000 5000 1500]);
+tb = TissueBlock(v,[100 100 100],[10000 10000 3000]);
+
+mesh_name = 'square_transmural_simple_alpha';
+method = 'simple_alpha';
+v = Vessel(1000,[0 0],[5000 5000 1500]);
+tb = TissueBlock(v,[100 100 100],[10000 10000 3000]);
+
+mesh_name = 'square_epicardial_potential';
+method = 'potential';
+v = Vessel(1000,[pi/2 pi/2],[5000 8500 1500]);
+tb = TissueBlock(v,[100 100 100],[10000 10000 3000]);
+
+mesh_name = 'square_epicardial_simple_alpha';
+method = 'simple_alpha';
+v = Vessel(1000,[pi/2 pi/2],[5000 8500 1500]);
+tb = TissueBlock(v,[100 100 100],[10000 10000 3000]);
+
+mesh_name = 'wide_epicardial_potential';
+method = 'potential';
 v = Vessel(1000,[pi/2 pi/2],[12500 8500 1500]);
 tb = TissueBlock(v,[100 100 100],[25000 10000 3000]);
-setter = TissueSetter(tb);
+
+mesh_name = 'wide_epicardial_simple_alpha';
+method = 'simple_alpha';
+v = Vessel(1000,[pi/2 pi/2],[12500 8500 1500]);
+tb = TissueBlock(v,[100 100 100],[25000 10000 3000]);
+
+
+
+% view results in Matlab
+% setter = TissueSetter(tb);
 
 % Creates folder to save and load the simulation in data_folder if needed
-mesh_name = 'wide_epicardial_potential';
-filename = 'epicardial';
+filename = 'temp';
 data_path = Config.data_path(filename);
 data_folder = fileparts(data_path); % [pathstr, name, ext, versn] = fileparts(filename)
 Config.make_simulation_folder(filename)
@@ -47,11 +82,6 @@ centroid_positions = Centroids.calculate_element_centroids([data_folder '/image_
 % METHOD
 centroids = Centroids(v,centroid_positions,data_folder);
 
-% decides which set of vectors to use
-method = 'potential';
-% method = 'simple_zero';
-% method = 'simple_alpha';
-
 % generate .vec file
 generate_lon_file(data_folder,centroids,method);
 
@@ -59,10 +89,10 @@ generate_lon_file(data_folder,centroids,method);
 upload_mesh_files(data_folder,mesh_name);
 
 % simulation name and folder for supercomputer
-simulation_name = 'wep_test';
+simulation_name = 'trigger_180ms';
 
 % run CARP on generated files for bidomain
 run_CARP('queeg',mesh_name,simulation_name)
 
 % copy image_renum_i.* and vm.igb.gz back to the local machine
-copy_files_from_supercomputer(data_folder,simulation_name)
+copy_files_from_supercomputer(simulation_name)
