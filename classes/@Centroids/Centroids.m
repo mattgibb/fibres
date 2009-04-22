@@ -17,7 +17,7 @@ classdef Centroids < Tissue
             centroids.calculate_grad_V
             centroids.min_V = min(centroids.V);
             centroids.max_V = max(centroids.V);
-            centroids.min_y = max(centroid_positions(:,2));
+            centroids.min_y = min(centroid_positions(:,2));
             centroids.max_y = max(centroid_positions(:,2));
             centroids.calculate_alpha
             centroids.calculate_projected_vectors

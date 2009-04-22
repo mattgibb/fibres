@@ -12,5 +12,5 @@ end
 coords = coords/1000;
 
 % write new data to file
-dlmwrite(pts_file_path,size(coords,1));
-dlmwrite(pts_file_path,coords,'-append','delimiter',' ','precision',8);
+dlmwrite(pts_file_path,size(coords,1),'precision','%.0f');
+dlmwrite(pts_file_path,coords,'-append','delimiter',' ','precision','%8f');

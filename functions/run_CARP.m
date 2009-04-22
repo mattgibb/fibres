@@ -4,6 +4,13 @@ root_folder = Config.root_folder;
 mesh_folder = Config.remote_mesh_folder(mesh_name);
 simulation_folder = Config.remote_simulation_folder(simulation_name);
 
+% Delete previous version of simulation
+disp(['Deleting any previous version of ' simulation_name ' on OSC server...'])
+command = ['!ssh ' hostname ' rm -rf ' simulation_folder];
+disp(command)
+eval(command)
+disp(' ')
+
 % Make a simulations folder in CARP/fibres/simulations
 disp(['Making simulation folder on OSC server...'])
 command = ['!ssh ' hostname ' mkdir ' simulation_folder];
